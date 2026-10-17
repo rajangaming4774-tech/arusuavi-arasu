@@ -108,8 +108,9 @@ if (!reduceMotion) {
     gsap.fromTo(front, { z: 40, yPercent: 25 }, { z: 160, yPercent: -15, ease: 'none', scrollTrigger: { ...st } });
   });
 
-  // Section headings rise line by line
-  gsap.utils.toArray('.h2, .display, .page-hero h1').forEach((el) => {
+  // Section headings rise line by line. Headings a section animates itself are skipped: two
+  // "from" tweens on one element race, and the second can end the heading at opacity 0.
+  gsap.utils.toArray('.h2, .display, .page-hero h1').filter((el) => !el.closest('.tastes__head')).forEach((el) => {
     gsap.from(el, {
       yPercent: 30, autoAlpha: 0, rotateX: -35, transformOrigin: '50% 100%', duration: 1.3, ease: 'expo.out',
       scrollTrigger: { trigger: el, start: 'top 90%' },

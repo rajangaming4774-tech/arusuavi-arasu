@@ -22,13 +22,15 @@
   --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-tamil: 'Noto Serif Tamil', 'Latha', serif;
 
+  /* Type scale. The big steps grow with whichever is smaller, the screen's width or its height,
+     so short laptop screens (e.g. 1536×730) and phones get normal-sized headings, not oversized ones. */
   --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.92rem);
-  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
-  --step-1: clamp(1.25rem, 1.15rem + 0.5vw, 1.55rem);
-  --step-2: clamp(1.6rem, 1.4rem + 1vw, 2.2rem);
-  --step-3: clamp(2.1rem, 1.7rem + 2vw, 3.4rem);
-  --step-4: clamp(2.7rem, 2rem + 3.5vw, 5.2rem);
-  --step-5: clamp(3.2rem, 2.2rem + 5.5vw, 7.5rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
+  --step-1: clamp(1.15rem, 1.05rem + 0.45vw, 1.4rem);
+  --step-2: clamp(1.4rem, 1.2rem + min(0.9vw, 1.6vh), 1.95rem);
+  --step-3: clamp(1.8rem, 1.3rem + min(1.7vw, 3vh), 2.9rem);
+  --step-4: clamp(2.2rem, 1.4rem + min(2.8vw, 4.6vh), 4.2rem);
+  --step-5: clamp(2.6rem, 1.6rem + min(4.4vw, 7vh), 5.8rem);
 
   --gutter: clamp(16px, 4vw, 48px);
   --radius: 18px;

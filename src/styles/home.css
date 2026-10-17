@@ -53,6 +53,7 @@
 .hero__est::after { transform: scaleX(-1); }
 .hero__est--plain { letter-spacing: 0.28em; color: var(--cream-200); margin-top: 10px; }
 .hero__est--plain::before, .hero__est--plain::after { display: none; }
+@media (max-width: 560px) { .hero__est.hero__est--plain { font-size: 0.6rem; letter-spacing: 0.12em; } }
 .hero__mark {
   margin: 22px 0 0; font: 600 clamp(2.8rem, 2rem + 5.6vw, 7.4rem)/1.15 var(--font-tamil); color: var(--gold-400);
   letter-spacing: 0.01em; text-shadow: 0 0 60px rgba(247, 193, 96, 0.35), 0 6px 30px rgba(0, 0, 0, 0.6);
@@ -444,7 +445,7 @@
 .vhero__brand.is-off { opacity: 0; translate: 0 -40px; pointer-events: none; }
 /* Hero type: Kavivanar (hand-drawn Tamil) for the name, Italiana (fine fashion serif) for English headings */
 .vhero { --font-hero-ta: 'Kavivanar', var(--font-tamil); --font-hero: 'Italiana', var(--font-display); }
-.vhero .hero__mark { margin-top: 18px; font: 400 clamp(3.2rem, 1.8rem + 6.6vw, 8.6rem)/1.2 var(--font-hero-ta); }
+.vhero .hero__mark { margin-top: 18px; font: 400 clamp(2.3rem, 0.9rem + min(5vw, 8.5vh), 6.4rem)/1.2 var(--font-hero-ta); }
 
 /* Steps 1-7: chapter captions, lower left */
 .vhero__chapters {
@@ -458,9 +459,9 @@
 .vhero__chapter.is-on > :nth-child(2) { transition-delay: 0.06s; }
 .vhero__chapter.is-on > :nth-child(3) { transition-delay: 0.12s; }
 .vhero__chapter.is-on > :nth-child(4) { transition-delay: 0.18s; }
-.vhero__num { display: block; font: 400 clamp(3rem, 2rem + 4vw, 6rem)/1 var(--font-hero); color: transparent; -webkit-text-stroke: 1px var(--gold-400); }
+.vhero__num { display: block; font: 400 clamp(2.4rem, 1.4rem + min(3vw, 5vh), 4.6rem)/1 var(--font-hero); color: transparent; -webkit-text-stroke: 1px var(--gold-400); }
 .vhero__kicker { margin: 10px 0 8px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold-400); }
-.vhero__chapter h2 { margin: 0; font: 400 clamp(2rem, 1.3rem + 2.8vw, 3.8rem)/1.08 var(--font-hero); letter-spacing: 0.01em; color: var(--cream-50); text-shadow: 0 6px 30px rgba(0, 0, 0, 0.6); }
+.vhero__chapter h2 { margin: 0; font: 400 clamp(1.7rem, 1.1rem + min(2.2vw, 3.8vh), 3.2rem)/1.08 var(--font-hero); letter-spacing: 0.01em; color: var(--cream-50); text-shadow: 0 6px 30px rgba(0, 0, 0, 0.6); }
 .vhero__chapter h2 + p { margin: 14px 0 0; max-width: 44ch; color: var(--cream-100); text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7); }
 
 /* Step 8: the finale */
@@ -469,7 +470,7 @@
   opacity: 0; visibility: hidden; transition: opacity 0.6s ease, visibility 0s 0.6s;
 }
 .vhero__finale.is-on { opacity: 1; visibility: visible; transition: opacity 0.9s ease 0.15s; }
-.vhero__finale h2 { margin: 18px 0 30px; max-width: 16ch; font: 400 clamp(2.2rem, 1.4rem + 3.4vw, 4.6rem)/1.08 var(--font-hero); text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 6px 34px rgba(0, 0, 0, 0.7); }
+.vhero__finale h2 { margin: 18px 0 30px; max-width: 16ch; font: 400 clamp(1.9rem, 1.2rem + min(2.8vw, 4.8vh), 3.8rem)/1.08 var(--font-hero); text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5), 0 6px 34px rgba(0, 0, 0, 0.7); }
 .vhero__finale h2 em { font-style: italic; color: var(--gold-400); }
 
 /* Chapter rail (desktop) and progress line */
@@ -506,7 +507,7 @@
 .reduced-motion .vhero__skip { display: none; }
 .is-story .vhero__cue { opacity: 0; }
 .vhero__line {
-  font: 400 clamp(1.5rem, 1.05rem + 1.9vw, 2.9rem)/1.15 var(--font-hero); letter-spacing: 0.02em; margin: 22px auto 32px;
+  font: 400 clamp(1.1rem, 0.85rem + min(1.6vw, 2.6vh), 2.3rem)/1.15 var(--font-hero); letter-spacing: 0.02em; margin: 18px auto 26px;
   text-shadow: 0 6px 34px rgba(0, 0, 0, 0.6);
 }
 /* The last word of the tagline turns over: bite, ritual, celebration */
