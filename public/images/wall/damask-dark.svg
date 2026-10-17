@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="240" viewBox="0 0 160 240">
+  <!-- Silk damask repeat: one medallion per tile, plus quarter medallions at the corners for a half-drop -->
+  <defs>
+    <g id="half" fill="#6b4510">
+      <path d="M0-92c6 8 9 16 6 24-2 5-6 7-6 7z"/>
+      <path d="M0-62c14-10 32-6 34 10 1 12-10 18-18 12 8 0 12-8 6-13-7-6-18-2-22 5z"/>
+      <path d="M0-30c20-4 40 6 42 28 1 16-10 26-24 26 12-6 16-16 12-26-5-14-20-18-30-14z"/>
+      <path d="M0 0c10 6 14 18 10 30-2 8-10 12-10 12z" opacity=".8"/>
+      <path d="M0 40c18 2 30 14 26 30-2 10-12 14-20 10 8-2 12-8 9-15-4-10-10-14-15-14z"/>
+      <path d="M0 78c8 4 12 10 10 16-1 3-6 6-10 6z"/>
+      <circle cx="0" cy="-102" r="3.2"/>
+      <circle cx="24" cy="-16" r="2.2"/>
+      <circle cx="30" cy="56" r="2"/>
+    </g>
+    <g id="motif"><use href="#half"/><use href="#half" transform="scale(-1 1)"/></g>
+  </defs>
+  <g opacity=".28">
+    <use href="#motif" transform="translate(80 120) scale(.82)"/>
+    <use href="#motif" transform="translate(0 0) scale(.82)"/>
+    <use href="#motif" transform="translate(160 0) scale(.82)"/>
+    <use href="#motif" transform="translate(0 240) scale(.82)"/>
+    <use href="#motif" transform="translate(160 240) scale(.82)"/>
+  </g>
+</svg>

@@ -1,0 +1,390 @@
+/* =====================================================================
+   Elite home sections: lamp lighting, legacy book, gallery wall,
+   written signatures, wedding-invitation enquiry
+   ===================================================================== */
+
+/* ============ Lamp lighting (opening) ============ */
+/* Lives inside the hero's pinned stage: lit first, then the red bloom becomes the hero background */
+.lamp-intro {
+  position: absolute; inset: 0; z-index: 10; overflow: hidden; isolation: isolate; color: var(--cream-50);
+  background: radial-gradient(ellipse 60% 70% at 50% 40%, #2a0507 0%, #140203 60%, #0b0102 100%);
+}
+.lamp-intro__glow {
+  position: absolute; left: 50%; top: 34%; width: 160vmax; aspect-ratio: 1; translate: -50% -50%;
+  background: radial-gradient(circle, rgba(255, 176, 64, 0.55) 0%, rgba(255, 120, 30, 0.22) 18%, rgba(180, 30, 20, 0.08) 38%, transparent 60%);
+  opacity: 0; pointer-events: none; z-index: 0;
+}
+.lamp {
+  position: absolute; left: 50%; bottom: 4svh; translate: -50% 0; z-index: 1;
+  height: min(78svh, 900px); aspect-ratio: 375 / 1129;
+}
+.lamp img { width: 100%; height: 100%; filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6)) brightness(0.55); }
+.flame {
+  position: absolute; left: calc(var(--x) * 1%); top: calc(var(--y) * 1%);
+  width: 9%; aspect-ratio: 1 / 2.4; translate: -50% -96%;
+  transform-origin: 50% 100%; scale: 0; z-index: 2;
+}
+.flame__body {
+  position: absolute; inset: 0;
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: radial-gradient(ellipse 50% 65% at 50% 78%, #fffbe6 0%, #ffe680 22%, #ffb020 45%, rgba(255, 90, 0, 0.75) 62%, rgba(255, 40, 0, 0) 78%);
+  filter: blur(0.6px);
+  animation: flicker 0.18s ease-in-out infinite alternate, sway 1.9s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+.flame__halo {
+  position: absolute; left: 50%; top: 55%; width: 900%; aspect-ratio: 1; translate: -50% -50%;
+  background: radial-gradient(circle, rgba(255, 190, 80, 0.5) 0%, rgba(255, 140, 40, 0.16) 30%, transparent 65%);
+  mix-blend-mode: screen; pointer-events: none;
+}
+@keyframes flicker { from { transform: scaleY(1) scaleX(1); opacity: 1; } to { transform: scaleY(1.08) scaleX(0.94); opacity: 0.92; } }
+@keyframes sway { 0%, 100% { rotate: -2deg; } 50% { rotate: 3deg; } }
+.lamp-intro__top, .lamp-intro__line {
+  position: absolute; left: 0; right: 0; text-align: center; z-index: 3; padding: 0 var(--gutter);
+}
+.lamp-intro__top { top: calc(var(--header-h) + 3vh); }
+.lamp-intro__ta { font: 600 clamp(1.4rem, 1rem + 1.6vw, 2.2rem)/1.2 var(--font-tamil); color: var(--gold-400); margin: 0; }
+.lamp-intro__est { font-size: 0.75rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--cream-200); margin: 8px 0 0; }
+.lamp-intro__line {
+  top: 46%; display: flex; justify-content: space-between; gap: min(34vw, 420px); margin: 0 auto; max-width: 1240px;
+  font: italic 500 clamp(1.6rem, 1rem + 2.6vw, 3.6rem)/1.1 var(--font-display); opacity: 0; text-shadow: 0 0 40px rgba(255, 150, 50, 0.45);
+}
+.lamp-intro__line span { flex: 1; }
+.lamp-intro__line span:first-child { text-align: right; }
+.lamp-intro__line span:last-child { text-align: left; }
+@media (max-width: 760px) {
+  .lamp-intro__line { top: auto; bottom: 14svh; flex-direction: column; gap: 0; }
+  .lamp-intro__line span, .lamp-intro__line span:first-child, .lamp-intro__line span:last-child { text-align: center; }
+  .lamp { height: min(62svh, 700px); bottom: 22svh; }
+}
+.lamp-intro__line em { color: var(--gold-400); }
+.lamp-intro__cue {
+  position: absolute; left: 50%; bottom: 3svh; translate: -50% 0; z-index: 3; margin: 0;
+  font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-200);
+  display: grid; justify-items: center; gap: 8px;
+}
+.lamp-intro__cue::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--gold-400); box-shadow: 0 0 16px 4px rgba(255, 180, 60, 0.6); animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.35; scale: 0.7; } }
+.lamp-intro__bloom {
+  position: absolute; inset: 0; z-index: 4; background: var(--hero-bg);
+  clip-path: circle(0% at 50% 34%); pointer-events: none;
+}
+.reduced-motion .lamp-intro { display: none; }
+.reduced-motion .lamp-intro .flame { scale: 1; }
+.reduced-motion .lamp-intro__glow, .reduced-motion .lamp-intro__line { opacity: 1; }
+.reduced-motion .lamp img { filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6)); }
+
+/* ============ Legacy book ============ */
+.legacy-book { position: relative; background: var(--cream-100); --wave-bg: var(--cream-100); }
+.legacy-book__stage {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+  display: grid; grid-template-rows: auto 1fr; padding-top: calc(var(--header-h) + 2vh);
+}
+.legacy-book__head { text-align: center; padding: 0 var(--gutter); }
+.legacy-book__head .eyebrow { justify-content: center; }
+.legacy-book__head .h2 { margin-bottom: 0; }
+.legacy-book__scene { position: relative; display: grid; place-items: center; perspective: 2200px; }
+.book {
+  --bw: min(980px, 90vw, calc((100svh - var(--header-h) - 200px) * 1.56));
+  --ph: calc(var(--bw) / 2 / 0.78);
+  --pw: calc(var(--bw) / 2);
+  position: relative; width: var(--bw); height: var(--ph);
+  transform-style: preserve-3d; rotate: x 14deg;
+}
+.book::before { /* shadow under the open book */
+  content: ''; position: absolute; left: 4%; right: 4%; bottom: -5%; height: 12%;
+  background: radial-gradient(ellipse at center, rgba(58, 10, 12, 0.35), transparent 70%); filter: blur(8px);
+  transform: translateZ(-2px);
+}
+.leaf {
+  position: absolute; left: 50%; top: 0; width: 50%; height: 100%;
+  transform-origin: 0% 50%; transform-style: preserve-3d;
+}
+.page {
+  position: absolute; inset: 0; overflow: hidden;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  background: #f6ead6 url('/feast/paper.webp') center / cover;
+  color: var(--ink-900);
+  padding: clamp(18px, 3.6%, 40px) clamp(18px, 7%, 52px);
+  display: flex; flex-direction: column;
+}
+.page::after { /* turning shade + gutter shadow */
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(58, 10, 12, calc(0.18 + var(--shade, 0) * 0.4)) 0%, rgba(58, 10, 12, 0) 14%);
+}
+.page--front { border-radius: 2px 10px 10px 2px; }
+.page--back { transform: rotateY(180deg); border-radius: 10px 2px 2px 10px; }
+.page--back::after { background: linear-gradient(270deg, rgba(58, 10, 12, calc(0.18 + var(--shade, 0) * 0.4)) 0%, rgba(58, 10, 12, 0) 14%); }
+.page--cover {
+  background: #5a0b10 url('/feast/cover.webp') center / cover; color: var(--gold-400);
+  align-items: center; justify-content: center; text-align: center;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.3);
+}
+.page--cover::after { background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 8%); }
+.cover__title { font: 600 calc(var(--pw) * 0.044)/1.15 var(--font-display); letter-spacing: 0.03em; text-transform: uppercase; margin: 0; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 0 12px rgba(255, 200, 100, 0.3);
+  background: linear-gradient(180deg, #ffe7a6, #c9932f 60%, #f5d27a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.cover__ta { font: 600 calc(var(--pw) * 0.03)/1.2 var(--font-tamil); margin: 6px 0; color: #e9c46a; }
+.cover__est { font-size: calc(var(--pw) * 0.022); letter-spacing: 0.35em; color: #e9c46a; margin: 0; }
+.page__photo {
+  flex: 1; margin: 6% 2% 4%; background: #fff; padding: 4% 4% 12%;
+  box-shadow: 0 6px 18px rgba(58, 10, 12, 0.25); rotate: -1.5deg; position: relative; min-height: 0;
+}
+.page__photo img { width: 100%; height: 100%; object-fit: cover; }
+.page__photo figcaption { position: absolute; left: 0; right: 0; bottom: 3%; text-align: center; font: italic 500 clamp(0.75rem, 1.4vw, 1.05rem)/1 var(--font-display); color: var(--ink-700); }
+.page__corner { position: absolute; width: 9%; aspect-ratio: 1; border: 2px solid rgba(201, 147, 47, 0.7); }
+.page__text { justify-content: center; }
+.page__text .page__year { font: 500 clamp(2rem, 6vw, 4.6rem)/1 var(--font-display); color: transparent; -webkit-text-stroke: 1px var(--maroon-600); margin: 0; }
+.page__text h3 { font-size: clamp(1.05rem, 2.2vw, 1.9rem); margin: 6px 0 10px; color: var(--maroon-800); }
+.page__text p { font-size: clamp(0.72rem, 1.15vw, 0.98rem); line-height: 1.6; color: var(--ink-700); margin: 0; }
+.page__orn { width: 40%; margin: 14px 0; color: var(--gold-500); }
+.page__num { position: absolute; bottom: 4%; left: 0; right: 0; text-align: center; font: italic 500 0.85rem/1 var(--font-display); color: var(--ink-500); }
+.page--end { align-items: center; justify-content: center; text-align: center; }
+.page--end p { font: italic 500 clamp(1rem, 2vw, 1.5rem)/1.3 var(--font-display); color: var(--maroon-700); max-width: 14ch; }
+.legacy-book__hint { position: absolute; left: 0; right: 0; bottom: 3svh; text-align: center; margin: 0; font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--ink-500); }
+
+/* Portrait screens: a calendar-style book bound at the top */
+.book--vertical {
+  --bw: min(88vw, 520px, calc((100svh - var(--header-h) - 190px) * 0.66));
+  --ph: calc(var(--bw) * 0.76);
+  --pw: var(--bw);
+  height: calc(var(--ph) * 2); rotate: x 8deg;
+}
+.book--vertical .leaf { left: 0; top: 50%; width: 100%; height: 50%; transform-origin: 50% 0%; }
+.book--vertical .page--back { transform: rotateX(180deg); }
+.book--vertical .page::after, .book--vertical .page--back::after { background: linear-gradient(180deg, rgba(58, 10, 12, calc(0.15 + var(--shade, 0) * 0.4)) 0%, rgba(58, 10, 12, 0) 12%); }
+.book--vertical .page--back::after { background: linear-gradient(0deg, rgba(58, 10, 12, calc(0.15 + var(--shade, 0) * 0.4)) 0%, rgba(58, 10, 12, 0) 12%); }
+.book--vertical .page__photo { margin: 3% 6% 2%; padding: 3% 3% 9%; }
+.book--vertical .page__text p { font-size: clamp(0.72rem, 3.2vw, 0.92rem); }
+.book--vertical .page__text .page__year { font-size: clamp(1.8rem, 9vw, 3rem); }
+
+/* Reduced motion: the book becomes a simple list of eras */
+.reduced-motion .legacy-book__stage { position: relative; height: auto; padding-bottom: 80px; }
+.reduced-motion .book { width: min(1100px, 92vw); height: auto; rotate: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-top: 40px; }
+.reduced-motion .leaf { position: relative; left: auto; width: auto; height: auto; display: contents; }
+.reduced-motion .page { position: relative; transform: none; min-height: 360px; border-radius: 10px; }
+.reduced-motion .page--cover, .reduced-motion .page--end, .reduced-motion .legacy-book__hint { display: none; }
+
+/* ============ Gallery wall of notable celebrations ============ */
+/* A Chettinad mansion hall built from photographed materials (public/images/chettinad, made by
+   scripts/chettinad.mjs): egg-white lime plaster, a studded Burma-teak beam with a painted border,
+   teak pillars on granite plinths, teak wainscot and an Athangudi tiled floor. Photos hang in carved
+   teak frames on brass chains; wall.js walks the camera along the hall. */
+.gallery-wall {
+  position: relative; height: 340svh; background: #140904; color: var(--cream-100); --wave-bg: #140904;
+  --fh: min(34svh, 330px);          /* frame height */
+  --hang: clamp(56px, 9svh, 92px);  /* top of wall to frame top */
+  --wh: calc(var(--hang) + var(--fh) + 150px); /* top of wall to wainscot */
+  --wains: max(120px, 16svh);       /* wainscot height */
+  --above: 80svh;                   /* ceiling above the wall */
+  --band: 150px;                    /* ceiling edge, beam and painted border */
+  --ph: calc(var(--wh) + var(--wains) + var(--band) * 0.6); /* pillar height, beam to floor */
+}
+.gallery-wall__stage { position: sticky; top: 0; height: 100svh; overflow: hidden; perspective: 1300px; perspective-origin: 50% 45%; background: #140904; }
+.gallery-wall__stage::after { /* the hall falls into warm shadow at the top and the edges */
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background:
+    radial-gradient(ellipse 42% 17% at 50% 17%, rgba(14, 6, 2, 0.82), rgba(14, 6, 2, 0) 100%),
+    linear-gradient(180deg, rgba(14, 6, 2, 0.95) 0%, rgba(14, 6, 2, 0.55) 10%, rgba(14, 6, 2, 0) 19%),
+    radial-gradient(ellipse 78% 72% at 50% 55%, rgba(0, 0, 0, 0) 55%, rgba(22, 9, 3, 0.7) 100%);
+}
+.gallery-wall__head { position: absolute; left: 0; right: 0; top: calc(var(--header-h) + 2vh); text-align: center; z-index: 3; padding: 0 var(--gutter); }
+.gallery-wall__head .eyebrow { justify-content: center; color: var(--gold-400); }
+.gallery-wall__head .h2 { text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6); }
+.gallery-wall__head .h2 em { color: var(--gold-400); }
+.wall {
+  position: absolute; left: 0; top: calc(var(--header-h) + 15svh); height: var(--wh);
+  display: flex; align-items: flex-start; gap: clamp(110px, 10vw, 170px);
+  padding: var(--hang) 30vw 0 40vw; transform-style: preserve-3d; transform-origin: 0% 50%;
+}
+.wall__room { /* the whole hall, far wider and taller than the frames so its edges never show */
+  position: absolute; left: -110vw; right: -110vw; top: calc(var(--above) * -1); height: calc(var(--above) + var(--wh) + var(--wains));
+  transform-style: preserve-3d; pointer-events: none;
+  background:
+    /* teak plank ceiling fading up into darkness */
+    linear-gradient(180deg, #0c0502 0%, rgba(12, 5, 2, 0) calc(var(--above) - 8svh)) 0 0 / 100% var(--above) no-repeat,
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0 2px, rgba(255, 200, 140, 0.06) 2px 3px, transparent 3px 46px) 0 0 / 100% var(--above) no-repeat,
+    linear-gradient(180deg, #24110a, #3a1c0e) 0 0 / 100% var(--above) no-repeat,
+    /* courtyard daylight falling across the plaster */
+    linear-gradient(180deg, rgba(255, 249, 236, 0.5), rgba(255, 244, 222, 0.32) 70%, rgba(120, 80, 40, 0.1)),
+    url('/images/chettinad/plaster.webp') 0 0 / 1100px auto,
+    #efe4cf;
+}
+.wall__beam { /* photographed ceiling edge, studded teak beam and painted border */
+  position: absolute; left: 0; right: 0; top: calc(var(--above) - var(--band) * 0.67); height: var(--band);
+  background: url('/images/chettinad/upper.webp') 0 0 / auto 100% repeat-x;
+  box-shadow: 0 10px 16px -6px rgba(60, 30, 10, 0.35);
+}
+.wall__dado { /* teak wainscot with its brass-trimmed rail and granite skirting */
+  position: absolute; left: 0; right: 0; top: calc(var(--above) + var(--wh)); height: var(--wains);
+  background: url('/images/chettinad/wainscot.webp') 0 0 / auto 100% repeat-x, #3a1a0c;
+  box-shadow: 0 -10px 22px rgba(60, 30, 10, 0.28);
+}
+.wall__floor { /* glossy Athangudi tiles running out towards the viewer */
+  position: absolute; left: 0; right: 0; top: 100%; height: 1100px; transform-origin: 50% 0; transform: rotateX(90deg);
+  background:
+    linear-gradient(180deg, rgba(255, 236, 205, 0.28) 0%, rgba(255, 236, 205, 0) 24%),
+    linear-gradient(180deg, rgba(20, 8, 3, 0.15) 0%, rgba(20, 8, 3, 0.8) 100%),
+    url('/images/chettinad/athangudi.webp') 0 0 / 540px 540px,
+    #7a2a16;
+}
+
+/* Teak pillars standing a little in front of the wall (cut-out photographs) */
+.pillar {
+  --pw: calc(var(--ph) * 0.2207);
+  flex: none; position: relative; width: var(--pw); height: var(--ph);
+  margin: calc(var(--band) * -0.6 - var(--hang)) calc(var(--pw) / -2) 0;
+  transform: translateZ(70px); pointer-events: none;
+  background: url('/images/chettinad/pillar.webp') center / 100% 100% no-repeat;
+  filter: drop-shadow(18px 22px 18px rgba(40, 18, 5, 0.42));
+}
+
+/* WebGL layer with the real 3D pillars (pillar3d.js); the cut-outs then only hold their place */
+.wall-3d { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; pointer-events: none; }
+.has-3d .pillar { background: none; filter: none; }
+
+.artwork { position: relative; z-index: 1; isolation: isolate; margin: 0; flex: none; display: grid; justify-items: center; gap: 22px; --lit: 1; }
+.artwork::before { /* daylight pooling on the plaster around the lit frame */
+  content: ''; position: absolute; left: 50%; top: -14%; width: 175%; height: 125%; translate: -50% 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse 46% 58% at 50% 12%, rgba(255, 244, 220, 0.5), rgba(255, 226, 180, 0.14) 55%, transparent 75%);
+  opacity: var(--lit);
+}
+.artwork__cords { /* twin brass chains up to a hook under the beam */
+  position: absolute; left: 50%; top: calc(var(--hang) * -1 + var(--band) * 0.2); width: 46%; height: calc(var(--hang) - var(--band) * 0.2 + 12px); translate: -50% 0; z-index: -1;
+  background:
+    linear-gradient(to top right, transparent calc(50% - 1.4px), #d6a64a calc(50% - 0.5px), #5a3a0e calc(50% + 0.8px), transparent calc(50% + 1.6px)) left / 50% 100% no-repeat,
+    linear-gradient(to top left, transparent calc(50% - 1.4px), #d6a64a calc(50% - 0.5px), #5a3a0e calc(50% + 0.8px), transparent calc(50% + 1.6px)) right / 50% 100% no-repeat;
+}
+.artwork__cords::before {
+  content: ''; position: absolute; left: 50%; top: -6px; width: 12px; height: 12px; translate: -50% 0; border-radius: 50%;
+  border: 3px solid #c99a3a; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45), inset 0 1px 0 #fff2c4;
+}
+.artwork__frame { /* the photographed teak frame sits over the picture; padding matches its opening */
+  position: relative; height: var(--fh); aspect-ratio: 1099 / 823;
+  padding: 8.9% 8.8% 9.2% 8.8%;
+  box-shadow: 0 40px 50px -22px rgba(50, 22, 6, 0.6), 0 16px 26px rgba(50, 22, 6, 0.32);
+  filter: brightness(calc(0.66 + 0.34 * var(--lit)));
+}
+.artwork__frame::after {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: url('/images/chettinad/frame.webp') center / 100% 100% no-repeat;
+}
+.artwork__frame img { /* the photo on an ivory mount */
+  width: 100%; height: 100%; object-fit: cover; display: block; box-sizing: border-box;
+  border: clamp(7px, 0.9vw, 13px) solid #f3ead8;
+  box-shadow: inset 0 0 0 1px rgba(120, 80, 30, 0.35);
+}
+.plaque { /* engraved brass plate with two screws */
+  position: relative; text-align: center; padding: 11px 34px 12px; min-width: 64%; max-width: 360px;
+  border: 1px solid #6b4510; border-radius: 2px; color: #3a1a05;
+  background:
+    radial-gradient(circle at 14px 50%, #fff2c4 0 1px, #9a6a1c 1.5px 3.2px, #4a2f08 3.6px, transparent 4.2px),
+    radial-gradient(circle at calc(100% - 14px) 50%, #fff2c4 0 1px, #9a6a1c 1.5px 3.2px, #4a2f08 3.6px, transparent 4.2px),
+    linear-gradient(180deg, #f6dc8e 0%, #d6a64a 45%, #b38330 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 248, 220, 0.75), inset 0 -2px 0 rgba(80, 45, 0, 0.25), 0 10px 18px rgba(50, 22, 6, 0.4);
+  text-shadow: 0 1px 0 rgba(255, 240, 200, 0.55);
+  filter: brightness(calc(0.7 + 0.3 * var(--lit)));
+}
+.plaque span { display: block; font-size: 0.66rem; letter-spacing: 0.26em; text-transform: uppercase; font-weight: 700; opacity: 0.75; }
+.plaque strong { font: 600 clamp(0.95rem, 1.3vw, 1.15rem)/1.25 var(--font-display); }
+.artwork--next .artwork__frame > div {
+  height: 100%; display: grid; place-content: center; justify-items: center; text-align: center; padding: 0 6%;
+  background: #f6ead6 url('/feast/paper.webp') center / cover;
+}
+.artwork--next p { font: italic 500 clamp(1.1rem, 1.8vw, 1.7rem)/1.2 var(--font-display); color: var(--maroon-700); margin: 0 0 14px; }
+@media (max-width: 700px) {
+  .gallery-wall { --fh: min(30svh, 52vw); --hang: 52px; --wh: calc(var(--hang) + var(--fh) + 140px); --band: 110px; }
+  .wall { gap: 96px; }
+  .plaque { padding: 9px 26px 10px; }
+}
+.reduced-motion .gallery-wall { height: auto; }
+.reduced-motion .gallery-wall__stage { position: relative; height: auto; padding: 200px 0 80px; perspective: none; }
+.reduced-motion .gallery-wall__stage::after, .reduced-motion .wall__room, .reduced-motion .pillar { display: none; }
+.reduced-motion .wall {
+  position: relative; top: auto; height: auto; flex-wrap: wrap; justify-content: center; padding: 160px var(--gutter) 80px; gap: 90px 60px;
+  background: url('/images/chettinad/upper.webp') 0 0 / auto 150px repeat-x, url('/images/chettinad/plaster.webp') 0 0 / 1100px auto, #efe4cf;
+}
+
+/* ============ Signatures written in gold ============ */
+.script-name { display: block; width: min(360px, 90%); height: auto; margin-top: 14px; overflow: visible; }
+.script-name text { font-family: 'Great Vibes', cursive; font-size: 54px; fill: var(--gold-400); fill-opacity: 0; stroke: var(--gold-400); stroke-width: 0.8; }
+
+/* ============ Wedding-invitation enquiry ============ */
+.invite-section { position: relative; height: 300svh; padding-bottom: 110px; background: var(--maroon-900); color: var(--cream-50); --wave-bg: var(--maroon-900); } /* the padding lets the finished card clear the footer's wave */
+.invite__stage {
+  position: sticky; top: 0; height: 100svh; overflow: hidden; perspective: 1600px;
+  background: radial-gradient(ellipse 60% 60% at 50% 60%, #8f1117 0%, var(--maroon-900) 70%);
+}
+.invite__intro { position: absolute; left: 0; right: 0; top: calc(var(--header-h) + 3vh); text-align: center; z-index: 5; padding: 0 var(--gutter); }
+.invite__intro .eyebrow { justify-content: center; color: var(--gold-400); }
+.invite__intro .h2 em { color: var(--gold-400); }
+.envelope {
+  --ew: min(620px, 90vw);
+  position: absolute; left: 50%; top: 58%; width: var(--ew); aspect-ratio: 1.55;
+  margin-left: calc(var(--ew) / -2); margin-top: calc(var(--ew) / -1.55 / 2);
+  transform-style: preserve-3d;
+}
+.envelope__back, .envelope__front, .envelope__flap { position: absolute; inset: 0; border-radius: 8px; }
+.envelope__back {
+  background:
+    repeating-linear-gradient(45deg, rgba(201, 147, 47, 0.22) 0 2px, transparent 2px 14px),
+    linear-gradient(160deg, #a5141c, #6a0f13);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+}
+.envelope__front {
+  z-index: 3; pointer-events: none;
+  background:
+    linear-gradient(to top right, #b3161f 49.6%, transparent 50%) left bottom / 50.5% 100% no-repeat,
+    linear-gradient(to top left, #a5131b 49.6%, transparent 50%) right bottom / 50.5% 100% no-repeat,
+    linear-gradient(to top, #c11a24 0%, #9e1219 100%) bottom / 100% 46% no-repeat;
+  clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0 -2px 3px rgba(0, 0, 0, 0.25));
+}
+.envelope__flap {
+  z-index: 4; height: 62%; transform-origin: 50% 0%; transform-style: preserve-3d;
+}
+.envelope__flap::before, .envelope__flap::after {
+  content: ''; position: absolute; inset: 0; clip-path: polygon(0 0, 100% 0, 50% 100%); backface-visibility: hidden;
+}
+.envelope__flap::before { background: linear-gradient(180deg, #c81a24, #941118); }
+.envelope__flap::after { /* gold damask liner seen when open */
+  /* Mirrored side to side, not top to bottom: once the flap swings up past its hinge the
+     liner then reads as a triangle pointing up from the envelope, like a real open flap */
+  transform: rotateY(180deg);
+  background:
+    url('/images/wall/damask-dark.svg') center top / 84px 126px,
+    radial-gradient(ellipse 70% 90% at 50% 0%, rgba(255, 244, 205, 0.45), transparent 70%),
+    linear-gradient(180deg, #e9c46a 0%, #c99a3a 60%, #a8741f 100%);
+  box-shadow: inset 0 0 0 2px rgba(120, 80, 20, 0.35);
+}
+.seal { position: absolute; left: 50%; top: 58%; width: 22%; translate: -50% -50%; z-index: 6; pointer-events: none; }
+.seal__half { position: absolute; inset: 0; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45)); }
+.seal__half img { width: 100%; height: auto; display: block; }
+.seal__half--l { clip-path: polygon(0 0, 54% 0, 46% 30%, 56% 55%, 44% 100%, 0 100%); }
+.seal__half--r { clip-path: polygon(54% 0, 100% 0, 100% 100%, 44% 100%, 56% 55%, 46% 30%); }
+.seal__sizer { visibility: hidden; width: 100%; height: auto; display: block; }
+.invite-card {
+  position: absolute; left: 5%; right: 5%; top: 6%; z-index: 2;
+  background: #f6ead6 url('/feast/paper.webp') center / cover; color: var(--ink-900);
+  border-radius: 6px; padding: clamp(18px, 4%, 34px) clamp(18px, 6%, 44px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35); text-align: center;
+  outline: 1px solid rgba(201, 147, 47, 0.6); outline-offset: -10px;
+}
+.invite-card__orn { width: 70px; margin: 0 auto 6px; color: var(--gold-500); }
+.invite-card__kicker { font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--maroon-600); font-weight: 700; margin: 0; }
+.invite-card h3 { font: 400 clamp(2rem, 4vw, 3rem)/1.1 'Great Vibes', var(--font-display); color: var(--maroon-700); margin: 6px 0 4px; }
+.invite-card__sub { font-size: 0.9rem; color: var(--ink-700); margin: 0 auto 16px; max-width: 40ch; }
+.invite-card .form__grid { text-align: left; gap: 10px 14px; }
+.invite-card .field label { font-size: 0.66rem; }
+.invite-card .field input, .invite-card .field select { padding: 10px 12px; font-size: 0.95rem; background: rgba(255, 255, 255, 0.8); }
+.invite-card .form__actions { justify-content: center; margin-top: 16px; }
+.invite-card .form__status { min-height: 1.2em; margin-top: 8px; font-size: 0.85rem; }
+@media (max-width: 560px) {
+  .invite-card { left: 2%; right: 2%; }
+  .invite-card .form__grid { grid-template-columns: 1fr 1fr; }
+  .invite-card .btn { min-height: 44px; padding: 0 16px; font-size: 0.72rem; }
+}
+.reduced-motion .invite-section { height: auto; }
+.reduced-motion .invite__stage { position: relative; height: auto; padding: 220px 0 80px; }
+.reduced-motion .envelope { position: relative; left: auto; top: auto; margin: 0 auto; aspect-ratio: auto; }
+.reduced-motion .envelope__back, .reduced-motion .envelope__front, .reduced-motion .envelope__flap, .reduced-motion .seal { display: none; }
+.reduced-motion .invite-card { position: relative; inset: auto; }

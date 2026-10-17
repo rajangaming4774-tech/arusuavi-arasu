@@ -1,0 +1,18 @@
+# Dependencies and build output (recreate with npm install / npm run build)
+node_modules/
+dist/
+
+# Raw source media and AI generation work files (large; the optimised copies live in public/)
+assets-src/
+assets-ai/
+
+# Local tool settings
+.claude/
+
+# OS and editor clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.env
+.env.*

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200" preserveAspectRatio="none">
+  <!-- One teak wainscot bay: a raised panel with a bevel and a gold hairline -->
+  <defs>
+    <linearGradient id="raise" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3b1a0d"/><stop offset=".5" stop-color="#2a1108"/><stop offset="1" stop-color="#1d0b05"/>
+    </linearGradient>
+  </defs>
+  <rect x="22" y="22" width="276" height="156" fill="url(#raise)"/>
+  <path d="M22 22h276l-14 14H36z" fill="#fff" opacity=".06"/>
+  <path d="M22 178h276l-14-14H36z" fill="#000" opacity=".35"/>
+  <path d="M22 22v156l14-14V36z" fill="#fff" opacity=".03"/>
+  <path d="M298 22v156l-14-14V36z" fill="#000" opacity=".25"/>
+  <rect x="44" y="44" width="232" height="112" fill="none" stroke="#d9a441" stroke-opacity=".55" stroke-width="1" vector-effect="non-scaling-stroke"/>
+  <rect x="22" y="22" width="276" height="156" fill="none" stroke="#000" stroke-opacity=".5" stroke-width="1" vector-effect="non-scaling-stroke"/>
+</svg>

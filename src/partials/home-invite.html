@@ -1,0 +1,46 @@
+    <section class="invite-section wave" data-invite aria-labelledby="invite-title">
+      <div class="invite__stage">
+        <div class="invite__intro" data-invite-intro>
+          <p class="eyebrow">Your celebration</p>
+          <h2 class="h2" id="invite-title">An invitation <em>to begin</em></h2>
+        </div>
+        <div class="envelope" data-envelope>
+          <div class="envelope__back"></div>
+          <div class="invite-card" data-invite-card>
+            <svg class="invite-card__orn" viewBox="0 0 100 40" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.5" d="M2 20h30M68 20h30M50 4c8 8 8 24 0 32-8-8-8-24 0-32Zm-12 16c6-6 18-6 24 0-6 6-18 6-24 0Z"/></svg>
+            <p class="invite-card__kicker">Arusuvai Arasu requests the pleasure of</p>
+            <h3>Planning your day</h3>
+            <p class="invite-card__sub">Share a few details and our family will call yours to begin.</p>
+            <form data-enquiry-form novalidate>
+              <div class="form__grid">
+                <div class="field"><label for="i-name">Name</label><input id="i-name" name="name" autocomplete="name" required /></div>
+                <div class="field"><label for="i-phone">Phone</label><input id="i-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" pattern="[0-9+ ()-]{8,}" required /></div>
+                <div class="field"><label for="i-type">Occasion</label>
+                  <select id="i-type" name="event_type" required>
+                    <option value="Wedding">Wedding</option>
+                    <option value="Corporate event">Corporate event</option>
+                    <option value="Theme-based event">Theme-based event</option>
+                    <option value="Catering only">Catering only</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="field"><label for="i-date">Date</label><input id="i-date" name="event_date" type="date" /></div>
+                <input class="hp" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" />
+              </div>
+              <div class="form__actions">
+                <button class="btn" type="submit">Send enquiry</button>
+                <button class="btn btn--wa" type="button" data-form-whatsapp>WhatsApp</button>
+              </div>
+              <p class="form__status" data-form-status role="status" aria-live="polite"></p>
+            </form>
+          </div>
+          <div class="envelope__front"></div>
+          <div class="envelope__flap" data-flap></div>
+          <div class="seal" data-seal aria-hidden="true">
+            <img class="seal__sizer" src="/feast/seal.webp" alt="" />
+            <div class="seal__half seal__half--l" data-seal-l><img src="/feast/seal.webp" alt="" /></div>
+            <div class="seal__half seal__half--r" data-seal-r><img src="/feast/seal.webp" alt="" /></div>
+          </div>
+        </div>
+      </div>
+    </section>

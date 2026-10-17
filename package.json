@@ -1,0 +1,29 @@
+{
+  "name": "arusuvai-arasu",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "images": "node scripts/optimize-images.mjs",
+    "cutout": "node scripts/cutout.mjs",
+    "relief": "node scripts/cutout.mjs --3d",
+    "icons": "node scripts/make-icons.mjs",
+    "videos": "node scripts/videos.mjs",
+    "story": "node scripts/story-videos.mjs",
+    "destinations": "node scripts/destinations.mjs",
+    "spotlight": "node scripts/spotlight.mjs"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^24.10.0",
+    "sharp": "^0.34.2",
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "lenis": "^1.3.4",
+    "three": "^0.177.0"
+  }
+}
