@@ -406,10 +406,10 @@
 }
 
 /* ============ Hero: one wedding film, scrubbed by scroll, in seven chapters ============ */
-/* .vhero is tall; its stage pins (sticky) while scroll steps through brand → seven chapters → finale.
+/* .vhero is tall; its stage pins (sticky) while scroll steps through brand → four chapters → finale.
    The manifesto then slides up over the still-pinned stage (negative margin, higher z-index). */
 .hero-stack { position: relative; }
-.vhero { position: relative; height: 1250svh; background: #000; color: var(--cream-50); }
+.vhero { position: relative; height: 800svh; background: #000; color: var(--cream-50); }
 .hero-stack > .manifesto { z-index: 1; background: var(--cream-50); margin-top: -100svh; }
 .vhero__stage {
   position: sticky; top: 0; height: 100svh; min-height: 560px; overflow: hidden; isolation: isolate;

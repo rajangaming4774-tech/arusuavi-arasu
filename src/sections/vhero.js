@@ -1,7 +1,7 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-// Home hero: one AI-generated film of an ultra-luxury wedding (seven scenes joined with dissolves).
+// Home hero: one AI-generated film of ultra-luxury catering (four scenes joined with dissolves).
 // The stage pins (CSS sticky). Left alone at the top, the whole film plays by itself, captions
 // following its time, then holds on the finale and starts over. Once the visitor scrolls, the page
 // jumps (invisibly, the stage is pinned) to the scroll position that matches the frame on screen,
@@ -27,7 +27,7 @@ export default function vhero(section, { reduceMotion, lenis }) {
   const finale = q('.vhero__finale');
   const rail = [...section.querySelectorAll('[data-goto]')];
   const bar = q('[data-progress]');
-  const duration = () => reel.duration || 49.42;
+  const duration = () => reel.duration || 30.21;
 
   let step = -1;
   let visible = true;
@@ -54,7 +54,7 @@ export default function vhero(section, { reduceMotion, lenis }) {
   const primeReverse = () => {
     if (!reelRev || dir === -1) return;
     wakeReverse();
-    const t = Math.max(0, (reel.duration || 49.42) - reel.currentTime - 1 / 24);
+    const t = Math.max(0, (reel.duration || 30.21) - reel.currentTime - 1 / 24);
     if (reelRev.readyState >= 1 && !reelRev.seeking && Math.abs(reelRev.currentTime - t) > 0.5) reelRev.currentTime = t;
   };
 

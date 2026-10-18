@@ -58,14 +58,14 @@
   <main id="main">
     <!-- Hero + manifesto share a stack: the hero story pins, then the manifesto slides up over it -->
     <div class="hero-stack">
-      <!-- 1. HERO: one AI-generated film of an ultra-luxury wedding we deliver; scrolling plays it through seven chapters -->
-      <section class="vhero" data-vhero aria-label="Introduction: an Arusuvai Arasu wedding, from arrival to the last dance">
+      <!-- 1. HERO: one AI-generated film of the ultra-luxury catering we deliver; it plays on its own, and scrolling carries it through four chapters -->
+      <section class="vhero" data-vhero aria-label="Introduction: Arusuvai Arasu luxury catering, from the welcome to the grand dinner">
         <div class="vhero__stage" data-vhero-stage>
           <!-- One continuous film of all seven scenes; the scroll position drives its playhead -->
           <div class="vhero__scenes" aria-hidden="true">
             <video class="vhero__reel" data-reel muted playsinline preload="none" poster="/video/story-film.webp"
               data-src="/video/story-film.mp4" data-src-phone="/video/story-film-m.mp4"
-              data-chapters="0,7.7,15.1,22.5,29.9,37.3,44.7"></video>
+              data-chapters="0,7.7,15.1,22.5"></video>
             <video class="vhero__reel vhero__reel--rev" data-reel-rev muted playsinline preload="none"
               data-src="/video/story-film-rev.mp4" data-src-phone="/video/story-film-m-rev.mp4"></video>
           </div>
@@ -84,15 +84,12 @@
             </div>
           </div>
 
-          <!-- Steps 1-7: one chapter per scene -->
+          <!-- Steps 1-4: one chapter per scene -->
           <ol class="vhero__chapters">
-            <li class="vhero__chapter" data-step-panel><span class="vhero__num">01</span><p class="vhero__kicker">Venue &amp; décor</p><h2>An entrance worthy of royalty</h2><p>From the venue hunt to the décor, every detail of the setting designed around your vision.</p></li>
-            <li class="vhero__chapter" data-step-panel><span class="vhero__num">02</span><p class="vhero__kicker">Guest management</p><h2>Every guest, treated like family</h2><p>We look after your guests from arrival to farewell, so you can live every moment.</p></li>
-            <li class="vhero__chapter" data-step-panel><span class="vhero__num">03</span><p class="vhero__kicker">Haldi &amp; mehendi</p><h2>Every ritual, in full colour</h2><p>Haldi, mehendi, engagement, seemandham and every theme-based event, planned and run for you.</p></li>
-            <li class="vhero__chapter" data-step-panel><span class="vhero__num">04</span><p class="vhero__kicker">Muhurtham</p><h2>Sacred moments, honoured</h2><p>Traditional and destination weddings, with every ritual given its due.</p></li>
-            <li class="vhero__chapter" data-step-panel><span class="vhero__num">05</span><p class="vhero__kicker">Our kitchens</p><h2>Four generations of craft</h2><p>Recipes handed down since 1952, cooked with creativity, zeal and affection.</p></li>
-            <li class="vhero__chapter" data-step-panel><span class="vhero__num">06</span><p class="vhero__kicker">The feast</p><h2>Up to 1,00,000 guests in a day</h2><p>Luxurious vegetarian feasts, from South Indian classics to global fusion.</p></li>
-            <li class="vhero__chapter" data-step-panel><span class="vhero__num">07</span><p class="vhero__kicker">Sangeet &amp; reception</p><h2>Nights they never forget</h2><p>Spectacular service to the very end, all handled by one team.</p></li>
+            <li class="vhero__chapter" data-step-panel><span class="vhero__num">01</span><p class="vhero__kicker">The welcome</p><h2>An entrance worthy of royalty</h2><p>From the first door that opens, every guest is received like family.</p></li>
+            <li class="vhero__chapter" data-step-panel><span class="vhero__num">02</span><p class="vhero__kicker">Our chefs</p><h2>Four generations of craft</h2><p>Recipes handed down since 1952, cooked with creativity, zeal and affection.</p></li>
+            <li class="vhero__chapter" data-step-panel><span class="vhero__num">03</span><p class="vhero__kicker">Silver service</p><h2>Served in perfect unison</h2><p>White-gloved service for every table, for up to 1,00,000 guests in a day.</p></li>
+            <li class="vhero__chapter" data-step-panel><span class="vhero__num">04</span><p class="vhero__kicker">The grand dinner</p><h2>A banquet to remember</h2><p>Premium and classic dining, from South Indian classics to global fusion.</p></li>
           </ol>
 
           <!-- Step 8: the call to action -->
@@ -106,14 +103,11 @@
           </div>
 
           <!-- Chapter rail and progress -->
-          <nav class="vhero__rail" aria-label="Wedding story chapters" data-rail>
-            <button type="button" data-goto="1"><span>Décor</span></button>
-            <button type="button" data-goto="2"><span>Guests</span></button>
-            <button type="button" data-goto="3"><span>Haldi</span></button>
-            <button type="button" data-goto="4"><span>Muhurtham</span></button>
-            <button type="button" data-goto="5"><span>Kitchens</span></button>
-            <button type="button" data-goto="6"><span>Feast</span></button>
-            <button type="button" data-goto="7"><span>Reception</span></button>
+          <nav class="vhero__rail" aria-label="Catering story chapters" data-rail>
+            <button type="button" data-goto="1"><span>Welcome</span></button>
+            <button type="button" data-goto="2"><span>Chefs</span></button>
+            <button type="button" data-goto="3"><span>Service</span></button>
+            <button type="button" data-goto="4"><span>Dinner</span></button>
           </nav>
           <div class="vhero__progress" aria-hidden="true"><i data-progress></i></div>
           <p class="vhero__cue" data-vhero-cue>Scroll to step inside</p>
