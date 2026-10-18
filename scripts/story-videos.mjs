@@ -77,10 +77,16 @@ const duration = execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'forma
 console.log(`story-film.mp4: ${((await stat(mp4)).size / 1e6).toFixed(1)} MB, ${(+duration).toFixed(2)} s; phone copy ${((await stat(mp4m)).size / 1e6).toFixed(1)} MB`);
 // Write the chapter start times straight into the hero video's data-chapters attribute
 const chapterAttr = `data-chapters="${chapters.join(',')}"`;
-const page = await readFile('index.html', 'utf8');
+let page = await readFile('index.html', 'utf8');
+// The film keeps the same file names, so give its URLs a fresh ?v= tag; otherwise browsers that
+// cached the previous film keep showing it.
+const version = Date.now().toString(36);
+page = page.replace(/(\/video\/story-film(?:-m)?(?:-rev)?\.(?:mp4|webp))(?:\?v=[\w-]+)?"/g, `$1?v=${version}"`);
+console.log(`index.html: film URLs tagged ?v=${version}`);
 if (/data-chapters="[^"]*"/.test(page)) {
   await writeFile('index.html', page.replace(/data-chapters="[^"]*"/, chapterAttr));
   console.log(`index.html: ${chapterAttr}`);
 } else {
+  await writeFile('index.html', page);
   console.log(`paste into the hero video: ${chapterAttr}`);
 }
