@@ -1,15 +1,15 @@
 // Joins the AI-generated hero scenes (Google Flow, Veo 3.1) from assets-ai/video/ into ONE film,
 // public/video/story-film.mp4, that the home hero plays on its own and scrubs with the scroll position.
 // Since 2026-10-18 the film is the ultra-luxury catering story: welcome, chef's table, silver service,
-// grand dinner (prompts in assets-ai/video/PROMPTS-luxury-catering.txt). The clips are 1280x720, so the
-// desktop film stays at that native size and the phone copy is 960 px wide.
-// Scenes are joined with short dissolves and lightly denoised (AI shimmer costs bits without adding detail).
-// Both films have a keyframe every second and no B-frames, so seeking to any frame is fast.
+// grand dinner (prompts in assets-ai/video/PROMPTS-luxury-catering.txt). Desktop film 1920x1080, phone copy 1280x720.
+// Scenes are joined with short dissolves. Both films have a keyframe every 12 frames (twice a second) and no B-frames,
+// so the scroll can scrub to any moment quickly and smoothly.
 // Each film also gets a REVERSED copy (story-film-rev.mp4 / story-film-m-rev.mp4): browsers cannot play
 // video backwards, so when the visitor scrolls up the hero plays the reversed copy forward instead of
 // seeking backwards frame by frame (which stutters and shows soft frames).
 // Writes the chapter start times into data-chapters on the hero video in index.html.
 import { execFileSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
@@ -17,7 +17,11 @@ import path from 'node:path';
 const SRC = 'assets-ai/video';
 const OUT = 'public/video';
 const FADE = 0.6;
-const W = 1280, H = 720; // native size of the Flow clips
+// Flow's free 1080p upscales go in assets-ai/video/hd/ under the same names; a scene without one
+// falls back to its 720p original, scaled up. The desktop film is 1920x1080, the phone copy 1280x720.
+const HD = path.join(SRC, 'hd');
+const W = 1920, H = 1080;
+const pick = (file) => (existsSync(path.join(HD, file)) ? path.join(HD, file) : path.join(SRC, file));
 const scenes = [
   { file: 'lux-1-welcome.mp4', from: 0, to: 8 }, // Veo 3.1 Quality
   { file: 'lux-2-chef.mp4', from: 0, to: 8 }, // Veo 3.1 Quality
@@ -30,9 +34,10 @@ const mp4 = path.join(OUT, 'story-film.mp4');
 const mp4m = path.join(OUT, 'story-film-m.mp4');
 
 // One trimmed, normalised stream per scene, then a chain of dissolves
-const inputs = scenes.flatMap((s) => ['-i', path.join(SRC, s.file)]);
+const inputs = scenes.flatMap((s) => ['-i', pick(s.file)]);
+scenes.forEach((s) => console.log(`${s.file}: ${pick(s.file).includes('hd') ? '1080p upscale' : '720p original'}`));
 const parts = scenes.map((s, i) =>
-  `[${i}:v]trim=${s.from}:${s.to},setpts=PTS-STARTPTS,${s.crop ? `crop=iw*${s.crop}:ih*${s.crop},scale=${W}:${H}:flags=lanczos,` : ''}fps=24,format=yuv420p[s${i}]`);
+  `[${i}:v]trim=${s.from}:${s.to},setpts=PTS-STARTPTS,${s.crop ? `crop=iw*${s.crop}:ih*${s.crop},` : ''}scale=${W}:${H}:flags=lanczos,fps=24,format=yuv420p[s${i}]`);
 const chapters = [0];
 let chain = '[s0]';
 let offset = 0;
@@ -44,12 +49,12 @@ for (let i = 1; i < scenes.length; i++) {
   chapters.push(+(offset + FADE / 2).toFixed(2));
 }
 
-parts.push('[joined]hqdn3d=1.5:1.5:6:6,split=2[hd][b]', '[b]scale=960:-2:flags=lanczos[sd]');
-const scrub = ['-g', '24', '-keyint_min', '24', '-bf', '0', '-pix_fmt', 'yuv420p', '-movflags', '+faststart'];
+parts.push('[joined]split=2[hd][b]', '[b]scale=1280:-2:flags=lanczos[sd]');
+const scrub = ['-g', '12', '-keyint_min', '12', '-bf', '0', '-pix_fmt', 'yuv420p', '-movflags', '+faststart'];
 execFileSync('ffmpeg', [
   '-y', '-loglevel', 'error', ...inputs, '-filter_complex', parts.join(';'),
-  '-map', '[hd]', '-an', '-c:v', 'libx264', '-preset', 'slow', '-crf', '23', '-profile:v', 'high', ...scrub, mp4,
-  '-map', '[sd]', '-an', '-c:v', 'libx264', '-preset', 'slow', '-crf', '26', ...scrub, mp4m,
+  '-map', '[hd]', '-an', '-c:v', 'libx264', '-preset', 'slow', '-crf', '22', '-profile:v', 'high', ...scrub, mp4,
+  '-map', '[sd]', '-an', '-c:v', 'libx264', '-preset', 'slow', '-crf', '25', ...scrub, mp4m,
 ], { stdio: 'inherit' });
 execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-ss', '0.4', '-i', mp4, '-frames:v', '1', '-c:v', 'libwebp', '-quality', '86', path.join(OUT, 'story-film.webp')]);
 
@@ -70,8 +75,8 @@ async function reverseFilm(src, out, crf) {
   execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', list, '-c', 'copy', '-movflags', '+faststart', out]);
   await rm(tmp, { recursive: true, force: true });
 }
-await reverseFilm(mp4, path.join(OUT, 'story-film-rev.mp4'), 26);
-await reverseFilm(mp4m, path.join(OUT, 'story-film-m-rev.mp4'), 27);
+await reverseFilm(mp4, path.join(OUT, 'story-film-rev.mp4'), 23);
+await reverseFilm(mp4m, path.join(OUT, 'story-film-m-rev.mp4'), 26);
 
 const duration = execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', mp4]).toString().trim();
 console.log(`story-film.mp4: ${((await stat(mp4)).size / 1e6).toFixed(1)} MB, ${(+duration).toFixed(2)} s; phone copy ${((await stat(mp4m)).size / 1e6).toFixed(1)} MB`);

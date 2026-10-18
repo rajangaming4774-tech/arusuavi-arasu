@@ -120,11 +120,20 @@ export default function vhero(section, { reduceMotion, lenis }) {
     dir = d;
     to.addEventListener('seeked', () => scenes.classList.toggle('is-rev', dir === -1), { once: true });
   }
+  // The speed eases toward the one the gap asks for (an abrupt change every frame reads as judder),
+  // and is only written when it has really changed, since every write makes the decoder re-time.
+  let rate = 1;
+  let moving = false;
   function drive(v, gap) {
-    v.playbackRate = Math.min(6, Math.max(0.4, gap * 2.5));
+    const want = Math.min(5, Math.max(0.35, gap * 2.2));
+    rate += (want - rate) * 0.18;
+    if (Math.abs(v.playbackRate - rate) > 0.03) v.playbackRate = rate;
     if (v.paused && !v.seeking) v.play().catch(() => {});
+    moving = true;
   }
   function settle() {
+    moving = false;
+    rate = 1;
     reel.pause();
     reel.playbackRate = 1;
     if (reelRev) { reelRev.pause(); reelRev.playbackRate = 1; }
@@ -134,7 +143,8 @@ export default function vhero(section, { reduceMotion, lenis }) {
     raf = 0;
     if (!scrubbing) return;
     const gap = target - position();
-    if (Math.abs(gap) <= 0.05) return settle();
+    // Glide to a stop near the target, and don't restart for a tiny nudge (stop-start reads as stutter)
+    if (Math.abs(gap) <= (moving ? 0.04 : 0.12)) return settle();
     if (gap < 0 && !revReady()) primeReverse();
     if (gap > 0 && gap < 4) { swapTo(1); drive(reel, gap); }
     else if (gap < 0 && gap > -4 && revReady()) { swapTo(-1); drive(reelRev, -gap); }
